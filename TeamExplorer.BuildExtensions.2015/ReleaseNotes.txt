@@ -1,5 +1,5 @@
 ﻿Version 1.1.3
-	- Make extension version for Visual Studio 2015, 2017
+	- Make extension version for Visual Studio 2015 and Visual Studio 2017
 
 Version 1.1.2
 	- Implemented double click on build name to open edit build definition (stoberman)
