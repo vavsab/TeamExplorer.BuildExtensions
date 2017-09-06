@@ -1,0 +1,70 @@
+﻿<Window x:Class="BuildTree.Views.OptionsDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="{Binding DisplayName}"
+        Height="150" Width="350"
+        SizeToContent="Height"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner"
+        xmlns:cmd="clr-namespace:BuildTree.DialogCloser"
+        xmlns:behav="clr-namespace:BuildTree.DialogCloser.Behavior"
+        xmlns:conv="clr-namespace:BuildTree.DialogCloser.Converter"
+        behav:DialogCloser.DialogResult="{Binding OpenCloseView.WindowCloseResult}"
+        FocusManager.FocusedElement="{Binding ElementName=SplitCharTextBox}"
+        >
+    <Window.Resources>
+        <conv:CountToVisibilityHiddenConverter x:Key="CountToVisibilityHidden" />
+        <conv:MsgTypeToResourceConverter x:Key="MsgTypeToResource" />
+    </Window.Resources>
+    <Window.InputBindings>
+        <KeyBinding Key="Enter" Command="{Binding OpenCloseView.OKCommand}"/>
+        <KeyBinding Key="Escape" Command="{Binding OpenCloseView.CancelCommand}"/>
+    </Window.InputBindings>
+    <Grid Margin="9">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Row="0">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Split Character" />
+                <TextBox Name="SplitCharTextBox" Text="{Binding SplitCharacter,UpdateSourceTrigger='PropertyChanged'}" HorizontalAlignment="Left" MinWidth="30" MaxLength="1" />
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1">
+            <StackPanel Visibility="{Binding OpenCloseView.ListMessages.Count, Converter={StaticResource CountToVisibilityHidden}}" Height="40">
+                <ListBox DataContext="{Binding OpenCloseView}"
+                     ItemsSource="{Binding ListMessages}" MaxHeight="40"
+                     BorderBrush="Transparent"
+                     Background="Transparent"
+                     Grid.Row="1"
+                     VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" ToolTip="{Binding MessageType}">
+                                <Image Source="{Binding CategoryOfMsg, Converter={StaticResource MsgTypeToResource}}" Width="16" Margin="3" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                <TextBlock Text="{Binding Message}" Margin="3" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+
+            <Grid VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.IsSharedSizeScope="True">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="StandardButtons" />
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="StandardButtons"/>
+                </Grid.ColumnDefinitions>
+                <Button Content="_Cancel"
+              Command="{Binding OpenCloseView.CancelCommand}"
+              Grid.Column="0" Margin="3" Padding="3"/>
+
+                <Button Content="_OK"
+              Command="{Binding OpenCloseView.OKCommand}"
+              Grid.Column="1" Margin="3" Padding="3"/>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Window>

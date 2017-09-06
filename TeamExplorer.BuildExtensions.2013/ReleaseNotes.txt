@@ -1,0 +1,19 @@
+﻿Version 1.1.2
+	- Implemented double click on build name to open edit build definition (stoberman)
+
+Version 1.1.1
+	- Tree is now sorted
+	- Made Visual Studio 2013 compatible only because of a number of changes.  Sorry 2012 folks, time to upgrade, previous version should work though
+	- Allow custom path separator by right clicking on any build and clicking Settings
+	- HUGE thanks to Scott Toberman (stoberman37) for all the work on this release.  Honestly, it's all him.  I just merged/tested/uploaded
+
+Version 1.0.2 
+    - Added preview image for Visual Studio Gallery.  Yep.  That's it.  
+
+Version 1.0.1  
+	- Fixed issue with context menu showing up for non-build defintions (tree items)
+	- Switched the split character to be a "." (like the old one)
+	- Fixed License.txt file
+	- Added Release Notes.
+
+Version 1.0.0 - Initial Release. 
